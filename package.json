@@ -1,0 +1,14 @@
+{
+  "name": "searchable-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/migace/searchable-api.git",
+  "author": "Michal Gacek <gacek.michael@outlook.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently \"cd server && npm start\" \"cd client && npm start\""
+  },
+  "dependencies": {
+    "concurrently": "^4.1.1"
+  }
+}
