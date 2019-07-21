@@ -11,7 +11,7 @@ app.get('/providers', async (req, res) => {
   try {
     const providersRepository = new ProvidersRepository();
     
-    res.json(await providersRepository.getAll());
+    res.json(await providersRepository.getByParams(req.query));
   } catch (err) {
     res.send(err);
   }

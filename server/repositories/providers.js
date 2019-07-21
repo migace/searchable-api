@@ -1,4 +1,5 @@
 const providerModel = require('../models/provider');
+const CONSTANTS = require('../constants');
 
 const parameters = [
   'max_discharges',
@@ -10,10 +11,17 @@ const parameters = [
   'state',
 ];
 
+const dollarParameters = [
+  'max_average_covered_charges',
+  'min_average_covered_charges',
+  'max_average_medicare_payments',
+  'min_average_medicare_payments',
+];
+
 let instance = null;
 
 class ProvidersRepository {
-  constructor(params) {
+  constructor() {
     if (!instance) {
       instance = this;
     }
@@ -21,12 +29,54 @@ class ProvidersRepository {
     return instance;
   }
 
-  getAll() {
-    return new Promise((resolve, reject) => {
-      providerModel.find({}, null, { limit: global.gConfig.maxDatabaseLimit }, (err, providers) => {        
-        err ? reject(err) : resolve(providers);
-      });
-    });
+  _checkParams(values) {
+    const urlParams = Object.keys(values);
+
+    return urlParams.filter(param => parameters.includes(param));
+  }
+
+  _generateQueryParams(params, checkedParams) {
+    let result = {};
+
+    checkedParams.forEach(checkedParam => result = { ...result, [checkedParam]: params[checkedParam] })
+
+    return result;
+  }
+
+  _generateWherePhrase(phrase, value) {
+    const subphrases = phrase.split('_');
+
+    if (dollarParameters.includes(phrase)) {
+      value = `$${value}`;
+    }
+
+    switch (subphrases[0].toLowerCase()) {
+      case CONSTANTS.MAX:
+        return { [CONSTANTS[phrase]]: { $lt: value } };
+      case CONSTANTS.MIN:
+          return { [CONSTANTS[phrase]]: { $gt: value } };
+      default:
+        return { [CONSTANTS[phrase]]: value };
+    }
+  }
+
+  getByParams(params) {
+    const checkedParams = this._checkParams(params);
+    const queryParams = this._generateQueryParams(params, checkedParams);
+    let where = {};
+
+    for (let key in queryParams) {
+      if (where[CONSTANTS[key]]) {
+        where[CONSTANTS[key]] = { 
+          ...where[CONSTANTS[key]], 
+          ...this._generateWherePhrase(key, queryParams[key])[CONSTANTS[key]],
+        };
+      } else {
+        where = { ...where, ...this._generateWherePhrase(key, queryParams[key]) };
+      }
+    }  
+
+    return providerModel.find(where, null, { limit: global.gConfig.maxDatabaseLimit });
   }
 }
 
