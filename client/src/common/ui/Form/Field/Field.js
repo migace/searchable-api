@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'proptypes';
 
 export const Field = ({ label, children }) => (
   <div className="field is-horizontal">
@@ -10,3 +11,11 @@ export const Field = ({ label, children }) => (
     </div>
   </div>
 );
+
+Field.propTypes = {
+  label: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
+};

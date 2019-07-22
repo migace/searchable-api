@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'proptypes';
 
 export const Input = ({ icon, value, type = 'text', placeholder, onChange = () => {} }) => (
   <div className="field">
@@ -18,3 +19,14 @@ export const Input = ({ icon, value, type = 'text', placeholder, onChange = () =
     </p>
   </div>
 );
+
+Input.propTypes = {
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]).isRequired,
+  icon: PropTypes.string,  
+  type: PropTypes.oneOf([ 'text', 'number' ]),
+  placeholder: PropTypes.string,
+  onChange: PropTypes.func,
+};

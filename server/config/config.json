@@ -2,7 +2,7 @@
   "development": {
       "config_id": "development",
       "node_port": 3010,
-      "database": "mongodb+srv://developer:developer@hihenry-searchable-api-tljxf.mongodb.net/providers?retryWrites=true&w=majority",
+      "database": "",
       "maxDatabaseLimit": 1000
   }
 }
