@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'proptypes';
+import PropTypes from 'prop-types';
 
 import Field from '../../../../common/ui/Form/Field';
 import Input from '../../../../common/ui/Input';
