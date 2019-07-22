@@ -33,7 +33,7 @@ export const SearchBar = ({ onSearch }) => {
           icon="minus" 
           placeholder="The minimum number of Total Discharges"
           value={min_total_discharges}
-          onChange={(value) => {console.log(value); setMin_total_discharges(value)}}
+          onChange={(value) => setMin_total_discharges(value)}
         />
         <Input
           icon="plus"

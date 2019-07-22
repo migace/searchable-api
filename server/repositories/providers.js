@@ -75,7 +75,6 @@ class ProvidersRepository {
         where = { ...where, ...this._generateWherePhrase(key, queryParams[key]) };
       }
     }  
-    console.log(where);
 
     return providerModel.find(where, null, { limit: global.gConfig.maxDatabaseLimit });
   }
