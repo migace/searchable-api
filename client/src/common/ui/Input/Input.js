@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'proptypes';
+import PropTypes from 'prop-types';
 
-export const Input = ({ icon, value, type = 'text', placeholder, onChange = () => {} }) => (
+export const Input = ({ icon, value = '', type = 'text', placeholder, onChange = () => {} }) => (
   <div className="field">
     <p className={`control is-expanded ${icon ? 'has-icons-left' : ''}`}>
       <input 
@@ -24,7 +24,7 @@ Input.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
-  ]).isRequired,
+  ]),
   icon: PropTypes.string,  
   type: PropTypes.oneOf([ 'text', 'number' ]),
   placeholder: PropTypes.string,

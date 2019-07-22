@@ -1,5 +1,6 @@
 import React from 'react';
-import PropTypes from 'proptypes';
+import PropTypes from 'prop-types';
+import uniqid from 'uniqid';
 
 import {
   Record,
@@ -10,7 +11,7 @@ import {
 
 export const SearchResults = ({ data = [] }) => {
   const result = data.map(item => (
-    <Record>
+    <Record key={uniqid()}>
       <Row>
         <Key><b>Provider Name:</b></Key>
         <Value>{item['Provider Name']}</Value>
@@ -64,18 +65,18 @@ export const SearchResults = ({ data = [] }) => {
 };
 
 SearchResults.propTypes = {
-  data: PropTypes.array(PropTypes.shape({
-    'DRG Definition': PropTypes.string.isRequired,
-    'Provider Id': PropTypes.number.isRequired,
-    'Provider Name': PropTypes.string.isRequired,
-    'Provider Street Address': PropTypes.string.isRequired,
-    'Provider City': PropTypes.string.isRequired,
-    'Provider State': PropTypes.string.isRequired,
-    'Provider Zip Code': PropTypes.number.isRequired,,
-    'Hospital Referral Region Description': PropTypes.string.isRequired,
-    'Total Discharges': PropTypes.number.isRequired,,
-    'Average Covered Charges': PropTypes.string.isRequired,
-    'Average Total Payments': PropTypes.string.isRequired,
-    'Average Medicare Payments': PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    'DRG Definition': PropTypes.string,
+    'Provider Id': PropTypes.number,
+    'Provider Name': PropTypes.string,
+    'Provider Street Address': PropTypes.string,
+    'Provider City': PropTypes.string,
+    'Provider State': PropTypes.string,
+    'Provider Zip Code': PropTypes.number,
+    'Hospital Referral Region Description': PropTypes.string,
+    'Total Discharges': PropTypes.number,
+    'Average Covered Charges': PropTypes.string,
+    'Average Total Payments': PropTypes.string,
+    'Average Medicare Payments': PropTypes.string,
   })),
 };

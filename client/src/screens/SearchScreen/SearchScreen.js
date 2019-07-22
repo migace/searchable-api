@@ -20,7 +20,9 @@ export const SearchScreen = () => {
       <SearchBarWrapper>
         <SearchBar onSearch={onSearch} />
       </SearchBarWrapper>
-      <SearchResults data={data} />
+      {data.length > 0 && (
+        <SearchResults data={data} />
+      )}
     </>
   );
 }

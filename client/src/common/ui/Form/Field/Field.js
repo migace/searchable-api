@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'proptypes';
+import PropTypes from 'prop-types';
 
 export const Field = ({ label, children }) => (
   <div className="field is-horizontal">
