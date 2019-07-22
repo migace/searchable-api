@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'proptypes';
 
 import {
   Record,
@@ -60,4 +61,21 @@ export const SearchResults = ({ data = [] }) => {
   return (
     <div>{ result }</div>
   );
+};
+
+SearchResults.propTypes = {
+  data: PropTypes.array(PropTypes.shape({
+    'DRG Definition': PropTypes.string.isRequired,
+    'Provider Id': PropTypes.number.isRequired,
+    'Provider Name': PropTypes.string.isRequired,
+    'Provider Street Address': PropTypes.string.isRequired,
+    'Provider City': PropTypes.string.isRequired,
+    'Provider State': PropTypes.string.isRequired,
+    'Provider Zip Code': PropTypes.number.isRequired,,
+    'Hospital Referral Region Description': PropTypes.string.isRequired,
+    'Total Discharges': PropTypes.number.isRequired,,
+    'Average Covered Charges': PropTypes.string.isRequired,
+    'Average Total Payments': PropTypes.string.isRequired,
+    'Average Medicare Payments': PropTypes.string.isRequired,
+  })),
 };

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'proptypes';
 
 import Field from '../../../../common/ui/Form/Field';
 import Input from '../../../../common/ui/Input';
@@ -85,4 +86,8 @@ export const SearchBar = ({ onSearch }) => {
       </div>
     </form>
   );
+};
+
+SearchBar.propTypes = {
+  onSearch: PropTypes.func.isRequired,
 };
